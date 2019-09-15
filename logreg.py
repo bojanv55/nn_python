@@ -1,7 +1,7 @@
 import numpy as np
 
 def softmax(z):
-   return np.array([(np.exp(el)/np.sum(np.exp(z))) for el in z])
+   return np.array([(np.exp(el)/np.sum(np.exp(el))) for el in z])
 
 def cost(W,F,L):
    m = F.shape[0] #get number of rows
@@ -20,7 +20,7 @@ mnist = input_data.read_data_sets("./datasets/MNIST_data/", one_hot=True)
 
 W = np.zeros((785, 10)) #784 features + 1 bias
 
-for _ in range(1000):
+for _ in range(10000):
    F, L = mnist.train.next_batch(100)
 
    F = np.insert(F,0, values=1, axis=1)
@@ -30,7 +30,7 @@ for _ in range(1000):
 
    gradients = gradient(W,F,L)
 
-   W = W - (0.001 * gradients)
+   W = W - (0.1 * gradients)
 
 FU = mnist.test.images
 
